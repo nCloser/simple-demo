@@ -10,10 +10,9 @@ import (
 )
 
 type FeedResponse struct {
-	StatusCode int32   `json:"status_code"`
-	StatusMsg  string  `json:"status_msg,omitempty"`
-	VideoList  []Video `json:"video_list,omitempty"`
-	NextTime   int64   `json:"next_time,omitempty"`
+	Response
+	NextTime  int64   `json:"next_time,omitempty"`
+	VideoList []Video `json:"video_list,omitempty"`
 }
 
 // 返回按投稿时间倒序的视频列表
@@ -54,18 +53,20 @@ func Feed(c *gin.Context) {
 
 	//get time node
 	var timeNode int64
-	if latestTime == "" {
+
+	if latestTime != "" {
 		timeNode, _ = strconv.ParseInt(latestTime, 10, 64)
 	} else {
 		timeNode = timeNow
 	}
+	fmt.Println(timeNode)
 
 	videoList := getVideoList(timeNode, token)
 
 	c.JSON(http.StatusOK, FeedResponse{
-		StatusCode: 0,
-		StatusMsg:  "Feed videos success",
-		NextTime:   time.Now().Unix(),
-		VideoList:  videoList,
+		Response:  Response{StatusCode: 0, StatusMsg: "feed成功"},
+		NextTime:  time.Now().Unix(),
+		VideoList: videoList,
 	})
+
 }

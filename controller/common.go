@@ -16,7 +16,7 @@ type Response struct {
 // 用于查询的Video结构体
 type Video struct {
 	Id            int64  `json:"id,omitempty"`
-	Author        User   `json:"author"`
+	Author        User   `json:"author,omitempty"`
 	PlayUrl       string `json:"play_url,omitempty"`
 	CoverUrl      string `json:"cover_url,omitempty"`
 	FavoriteCount int64  `json:"favorite_count,omitempty"`
