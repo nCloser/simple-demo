@@ -14,6 +14,7 @@ func TestFeed(t *testing.T) {
 	feedResp := e.GET("/douyin/feed/").Expect().Status(http.StatusOK).JSON().Object()
 	feedResp.Value("status_code").Number().Equal(0)
 	feedResp.Value("video_list").Array().Length().Gt(0)
+	fmt.Println(feedResp.Value("video_list").Array().Length())
 
 	for _, element := range feedResp.Value("video_list").Array().Iter() {
 		video := element.Object()

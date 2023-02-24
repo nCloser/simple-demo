@@ -3,16 +3,17 @@ package service
 import (
 	"encoding/json"
 	"fmt"
-	"github.com/RaymondCode/simple-demo/controller"
 	"io"
 	"net"
 	"sync"
+
+	"github.com/nCloser/simple-demo/controller"
 )
 
 var chatConnMap = sync.Map{}
 
 func RunMessageServer() {
-	listen, err := net.Listen("tcp", "127.0.0.1:9090")
+	listen, err := net.Listen("tcp", "127.0.0.1:10113") // change the listen port from 9090 to 10111
 	if err != nil {
 		fmt.Printf("Run message sever failed: %v\n", err)
 		return
